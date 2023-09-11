@@ -1,0 +1,112 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.chaquo.python'
+}
+
+android {
+    namespace 'io.benkon.sample.image_detection'
+    compileSdk 33
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    defaultConfig {
+        applicationId "io.benkon.sample.image_detection"
+        minSdk 29
+        targetSdk 33
+        versionCode 1
+        versionName "1.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        python{
+//            extractPackages "lapx"
+            pip{
+//                options "--extra-index-url", "D:\\000_work\\000_repos\\image-detection\\app\\pylib"
+                options "--extra-index-url", "/home/binn/Projects/python4imdetection/app/pylib"
+                install "opencv-python==4.5.1.48"
+                install "numpy==1.19.5"
+                install "lap==0.4.0"
+//                install "lapx==0.5.2"
+                install "tensorflow==2.1.0"
+                install "ultralytics==8.0.175"
+                install "scipy==1.4.1"
+
+//                install "setuptools==41.2.0"
+//                install "wheel"
+//                install "git+https://github.com/rathaROG/lapx.git"
+//                install "opencv-python==4.5.1.48"
+//                install "numpy==1.23.3"
+
+//                install "grpcio==1.39.0"
+//                install "tensorboard==2.4.1"
+//                install "torch==1.8.1"
+            }
+        }
+        defaultConfig {
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+
+            python {
+                version "3.8"
+//                buildPython "C:\\Python38\\python.exe"
+            }
+
+        }
+        sourceSets {
+            main {
+                python.srcDir "src/main/python"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module']
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+
+
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.3'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.3'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.12.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-api:2.12.0'
+
+    implementation 'org.tensorflow:tensorflow-lite-support:0.4.3'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.3.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    implementation 'lib.kashif:folderpicker:2.4'
+}
