@@ -28,8 +28,8 @@ android {
             pip{
 //                options "--extra-index-url", "D:\\000_work\\000_repos\\image-detection\\app\\pylib"
                 options "--extra-index-url", "/home/binn/Projects/python4imdetection/app/pylib"
-                install "opencv-python==4.5.1.48"
-                install "numpy==1.19.5"
+                install "opencv-python==4.6.0.66"
+                install "numpy==1.22.2"
                 install "lap==0.4.0"
 //                install "lapx==0.5.2"
                 install "tensorflow==2.1.0"
